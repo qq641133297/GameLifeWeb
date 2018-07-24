@@ -14,10 +14,10 @@
           </thead>
           <tbody>
               <tr v-for="item in thingList" :key="item.name" :class="item.color">
-                  <td>{{item.name}}</td>
-                  <td>{{item.quality}}</td>
+                  <td >{{item.name}}</td>
+                  <td >{{item.quality}}</td>
                   <td>
-                    <p v-for="attr in item.attribute" :key="attr">{{attr}}</p>
+                    <span v-for="attr in item.attribute" :key="attr" style="display:block">{{attr}}</span>
                   </td>
                   <td>{{item.getway}}</td>
                   <td>{{item.level}}</td>
