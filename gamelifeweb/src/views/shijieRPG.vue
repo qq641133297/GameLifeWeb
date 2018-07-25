@@ -1,31 +1,26 @@
 <template>
-    <div>
-      <h3>世界RPG列表</h3>
-      <table>
-          <thead>
-            <tr>
-              <th>名称</th>
-              <th>品质</th>
-              <th>属性</th>
-              <th>来源</th>
-              <th>等级</th>
-              <th>专属强化</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr v-for="item in thingList" :key="item.name" :class="item.color">
-                  <td >{{item.name}}</td>
-                  <td >{{item.quality}}</td>
-                  <td>
-                    <span v-for="attr in item.attribute" :key="attr" style="display:block">{{attr}}</span>
-                  </td>
-                  <td>{{item.getway}}</td>
-                  <td>{{item.level}}</td>
-                  <td>{{item.roleUp}}</td>
-              </tr>
-          </tbody>
-      </table>
-    </div>
+  <v-card>
+    <v-card-title>
+      世界RPG装备列表
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search..." single-line hide-details></v-text-field>
+    </v-card-title>
+    <v-divider class="my-2"></v-divider>
+    <v-data-table :headers="headers" :items="thingList" class="elevation-1" :search="search">
+      <template slot="items" slot-scope="props">
+        <tr>
+          <td>{{props.item.name}}</td>
+          <td>{{props.item.quality}}</td>
+          <td class="text-xs-left">
+            <span v-for="attr in props.item.attribute" :key="attr" style="display:block">{{attr}}</span>
+          </td>
+          <td class="text-xs-left">{{props.item.getway}}</td>
+          <td class="text-xs-right">{{props.item.level}}</td>
+          <td>{{props.item.roleUp}}</td>
+        </tr>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
@@ -34,7 +29,19 @@ export default {
   data () {
     return {
       thingList: [],
-      search: ''
+      search: '',
+      headers: [
+        {
+          text: '名称',
+          align: 'left',
+          value: 'name'
+        },
+        { text: '品质', value: 'quality' },
+        { text: '属性', value: 'attribute', align: 'left', sortable: false },
+        { text: '获取方式', value: 'getway' },
+        { text: '等级', value: 'level' },
+        { text: '专属强化', value: 'roleUp' }
+      ]
     };
   },
   methods: {
@@ -73,33 +80,6 @@ export default {
 };
 </script>
 <style>
-table {
-  border: 1px solid #fff;
-  border-right: 0;
-  border-bottom: 0;
-  width: 98%;
-}
-
-tr {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-th,
-td {
-  padding: 10px;
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
-  text-align: center;
-  width: 100%;
-}
-
-th {
-  font-weight: 400;
-  background-color: #dadada;
-}
-
 .hj {
   background-color: rgba(211, 230, 197, 1);
 }

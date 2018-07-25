@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position:fixed;width:100%;height:100%;left:0;top:0">
     <div id="linkstart" style="overflow:hidden"></div>
     <div @click="start" class='jylee-btn' v-show='!isStart'>Link Start</div>
     <audio id="linkstartMP3" src="/static/audio/link_star.min.MP3"></audio>
